@@ -26,31 +26,37 @@ export function activate() {
         const selectionStart = selection.start;
         const selectionEnd = selection.end;
 
-        if (selectionEnd.line !== selectionStart.line) {
-          // For blocks
+        if (!selection.isSingleLine) {
           const selectionSpaces = editor.document.lineAt(selectionStart.line).text.substring(0, selectionStart.character);
-
-          // Last line
-          editBuilder.insert(
-            new vscode.Position(selectionEnd.line, selectionEnd.character), `\n${selectionSpaces}{% endtrans %}`
-          );
-          editBuilder.insert(new vscode.Position(selectionEnd.line, 0), tabSizeSpace);
-
-          for (let lineNum = selectionEnd.line - 1; lineNum > selectionStart.line; lineNum--) {
-            editBuilder.insert(new vscode.Position(lineNum, 0), tabSizeSpace);
-          }
 
           // First line
           editBuilder.insert(
             new vscode.Position(selectionStart.line, selectionStart.character), `{% trans %}\n${selectionSpaces}${tabSizeSpace}`
           );
-        } else {
-          // For inline
+
+          // Indent in-between lines
+          for (let lineNum = selectionEnd.line - 1; lineNum > selectionStart.line; lineNum--) {
+            editBuilder.insert(new vscode.Position(lineNum, 0), tabSizeSpace);
+          }
+
+          // Last line
+          editBuilder.insert(
+            new vscode.Position(selectionEnd.line, selectionEnd.character), `\n${selectionSpaces}{% endtrans %}`
+          );
+
+          // Indent last line
+          editBuilder.insert(new vscode.Position(selectionEnd.line, 0), tabSizeSpace);
+          editor.selection = new vscode.Selection(selectionEnd, selectionEnd);
+        }
+
+        if (selection.isSingleLine) {
           const startPosition = new vscode.Position(selectionEnd.line, selectionStart.character);
           const endPosition = new vscode.Position(selectionEnd.line, selectionEnd.character);
 
           editBuilder.insert(startPosition, "{{ _('");
           editBuilder.insert(endPosition, "') }}");
+
+          editor.selection = new vscode.Selection(selectionEnd, selectionEnd);
         }
       }
     })
