@@ -31,7 +31,7 @@ export function activate() {
 
           // First line
           editBuilder.insert(
-            new vscode.Position(selectionStart.line, selectionStart.character), `{% trans %}\n${selectionSpaces}${tabSizeSpace}`
+            new vscode.Position(selectionStart.line, selectionStart.character), `{% trans -%}\n${selectionSpaces}${tabSizeSpace}`
           );
 
           // Indent in-between lines
@@ -41,7 +41,7 @@ export function activate() {
 
           // Last line
           editBuilder.insert(
-            new vscode.Position(selectionEnd.line, selectionEnd.character), `\n${selectionSpaces}{% endtrans %}`
+            new vscode.Position(selectionEnd.line, selectionEnd.character), `\n${selectionSpaces}{%- endtrans %}`
           );
 
           // Indent last line
