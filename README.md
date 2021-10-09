@@ -1,4 +1,4 @@
-# vscode-wrapforgettext
+# Wrap for Gettext
 
 ## What is it
 A VSCode extension for wrapping texts to pass through gettext in Jinja.
