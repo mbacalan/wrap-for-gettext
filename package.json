@@ -2,9 +2,13 @@
   "name": "wrapforgettext",
   "displayName": "Wrap for Gettext",
   "description": "A VSCode extension to wrap texts with markup to pass into gettext in Jinja",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publisher": "mbacalan",
-  "keywords": ["gettext", "translation", "localization"],
+  "keywords": [
+    "gettext",
+    "translation",
+    "localization"
+  ],
   "author": {
     "name": "Muhammed Bacalan",
     "email": "muhammedbacalan@gmail.com",
