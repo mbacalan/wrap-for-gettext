@@ -4,6 +4,7 @@
   "description": "A VSCode extension to wrap texts with markup to pass into gettext in Jinja",
   "version": "1.1.1",
   "publisher": "mbacalan",
+  "keywords": ["gettext", "translation", "localization"],
   "author": {
     "name": "Muhammed Bacalan",
     "email": "muhammedbacalan@gmail.com",
